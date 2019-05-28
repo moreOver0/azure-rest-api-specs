@@ -1,0 +1,15 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Content-Type": "application/json",
+    "Ocp-Apim-Subscription-Key": "{API key}"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        "f9f0114c-3c4c-4d3a-a6c7-f4d6d595f4f7",
+        "aaaaaaaa-1111-2222-3333-444444444444"
+      ]
+    }
+  }
+}

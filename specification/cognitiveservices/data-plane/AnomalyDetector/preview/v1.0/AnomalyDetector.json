@@ -112,6 +112,160 @@
           }
         }
       }
+    },
+    "/timeseries/": {
+      "get": {
+        "summary": "List time series of each unique user.",
+        "description": "List time series of each unique user.",
+        "operationId": "ListTimeSeries",
+        "parameters": [
+        ],
+        "consumes": [
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "type": "array",
+              "description": "",
+              "items": {
+                "type": "string",
+                "x-nullable": false
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get information of a time series example": {
+            "$ref": "./examples/GetTimeSeriesIds.json"
+          }
+        }
+      }
+    },
+    "/timeseries/{timeSeriesId}": {
+      "get": {
+        "summary": "Get meta information for the specified timeseries.",
+        "description": "",
+        "operationId": "GetTimeSeriesMeta",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesId"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/TimeseriesInfo"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get information of a time series example": {
+            "$ref": "./examples/GetTimeSeries.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "Creat a timeseries.",
+        "description": "",
+        "operationId": "CreateTimeSeries",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TimeSeriesInfo"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/TimeSeriesInfo"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get information of a time series example": {
+            "$ref": "./examples/CreateTimeSeries.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete the specified timeseries.",
+        "description": "",
+        "operationId": "DeleteTimeSeries",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesId"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/TimeSeriesInfo"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get information of a time series example": {
+            "$ref": "./examples/DeleteTimeSeries.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -208,6 +362,50 @@
           "type": "number",
           "format": "float",
           "description": "The measurement of that point, should be float."
+        }
+      }
+    },
+    "TimeSeriesInfo": {
+      "type": "object",
+      "required": [
+        "series",
+        "granularity"
+      ],
+      "properties": {
+        "seriesId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "An unique id for the timeseries."
+        },
+        "granularity": {
+          "type": "string",
+          "description": "The granularity of the series."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "Dimensions",
+          "items": {
+            "type": "string",
+            "x-nullable": false
+          }
+        },
+        "customInterval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Seconds between two time series points."
+        },
+        "retentionDurationInHours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Hours that the data is kept."
+        },
+        "description": {
+          "type": "string",
+          "description": "Descriptions for the time series."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the time series."
         }
       }
     },
@@ -344,8 +542,8 @@
       "in": "path",
       "x-ms-skip-url-encoding": true
     },
-    "timeseriesId": {
-      "name": "timeseriesId",
+    "timeSeriesId": {
+      "name": "timeSeriesId",
       "description": "",
       "x-ms-parameter-location": "method",
       "required": true,
