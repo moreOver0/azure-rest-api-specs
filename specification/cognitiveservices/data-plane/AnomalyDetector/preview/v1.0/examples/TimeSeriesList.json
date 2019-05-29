@@ -2,14 +2,28 @@
   "parameters": {
     "Endpoint": "{Endpoint}",
     "Content-Type": "application/json",
-    "Ocp-Apim-Subscription-Key": "{API key}"
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "next": "f9f0114c-3c4c-4d3a-a6c7-f4d6d595f4f7/f9f0114c-3c4c-4d3a-a6c7-f4d6d595f4f8"
   },
   "responses": {
     "200": {
-      "body": [
-        "f9f0114c-3c4c-4d3a-a6c7-f4d6d595f4f7",
-        "aaaaaaaa-1111-2222-3333-444444444444"
-      ]
+      "body": {
+        "series": [
+          {
+            "seriesId": "f9f0114c-3c4c-4d3a-a6c7-f4d6d595f4f7",
+            "granularity": "daily",
+            "dimensions": {
+              "Market": "en-us",
+              "Country": "Canada"
+            },
+            "customInterval": 1,
+            "retentionDurationInHours": 4320,
+            "description": "Sample Daily Series",
+            "name": "SampleSeries"
+          }
+        ],
+        "nextLink": null
+      }
     }
   }
 }
